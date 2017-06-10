@@ -32,7 +32,7 @@ int udp_server(char *srv_addr, char *srv_port)
     {
 	bytes = recvfrom(rcv_socket, rcv_buf, sizeof(rcv_buf), 0, (struct sockaddr*)&addr, &addr_len);
 	TRACE(("[UDP] Msg RX from %s:%d (%d bytes) received\n", inet_ntoa(addr.sin_addr), ntohs(addr.sin_port), bytes, rcv_buf));
-//	print_payload(rcv_buf, bytes);
+	print_payload(rcv_buf, bytes);
 	
 	if(comm_str.tcp_conn_flag)
 	{
