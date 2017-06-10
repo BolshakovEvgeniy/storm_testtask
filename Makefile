@@ -8,8 +8,8 @@ TCP_DIR=./tcp_client
 
 all: storm_testtask
 
-storm_testtask: main.o log.o udp_server.o tcp_client.o tcp_bind.o
-	$(CC) -pthread -o storm_testtask main.o log.o udp_server.o tcp_client.o tcp_bind.o
+storm_testtask: main.o log.o udp_server.o tcp_client.o
+	$(CC) -pthread -o storm_testtask main.o log.o udp_server.o tcp_client.o
 
 main.o: main.c
 	$(CC) $(CFLAGS) -I$(INC_DIR) main.c
@@ -23,8 +23,6 @@ udp_server.o: $(UDP_DIR)/udp_server.c
 tcp_client.o: $(TCP_DIR)/tcp_client.c
 	$(CC) $(CFLAGS) -I$(INC_DIR) $(TCP_DIR)/tcp_client.c
 
-tcp_bind.o: $(TCP_DIR)/tcp_bind.c
-	$(CC) $(CFLAGS) -I$(INC_DIR) $(TCP_DIR)/tcp_bind.c
 clean:
 	rm *.o storm_testtask
 

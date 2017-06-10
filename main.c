@@ -31,13 +31,6 @@ void *tcp_thread(void *arg)
     return 0; 
 }
 
-void *tcp_bind_thread(void *arg)
-{
-    TRACE(("[TCP_BIND] Binding local TCP port to prevent receiving RST\n"));
-    tcp_server();
-    return 0;
-}
-
 void open_log(char *fname, int fsize)
 {
 	FILE *fp;
@@ -53,7 +46,7 @@ void open_log(char *fname, int fsize)
 
 int main(int argc, char **argv)
 {
-    pthread_t 		udp_thread_id, tcp_thread_id, tcp_bind_thread_id;
+    pthread_t 		udp_thread_id, tcp_thread_id;
     pthread_attr_t 	common_attr;
     static ip_params	serv_udp, clnt_tcp;
     char		*ptr;
@@ -107,11 +100,9 @@ int main(int argc, char **argv)
     pthread_attr_init(&common_attr);
     pthread_attr_setdetachstate(&common_attr, PTHREAD_CREATE_JOINABLE);
 
-    //pthread_create(&tcp_bind_thread_id, &common_attr, tcp_bind_thread, NULL);
     pthread_create(&udp_thread_id, &common_attr, udp_thread, (void*)&serv_udp);
     pthread_create(&tcp_thread_id, &common_attr, tcp_thread, (void*)&clnt_tcp);
 
-    //pthread_join(tcp_bind_thread_id, NULL);
     pthread_join(udp_thread_id, NULL);
     pthread_join(tcp_thread_id, NULL);
 

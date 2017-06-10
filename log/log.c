@@ -41,7 +41,7 @@ void log_write(const char *fmt, ...)
     va_end(args);
 }
 
-void print_payload(unsigned char* data , int len)
+void print_payload(char* data , int len)
 {
     for(int i=0 ; i < len ; i++)
     {

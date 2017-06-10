@@ -56,4 +56,4 @@ int udp_server(char*, char*);
 int tcp_client(char*, char*);
 int tcp_server();
 void log_write(const char *fmt, ...);
-void print_payload(unsigned char* data , int len);
+void print_payload(char* data , int len);
