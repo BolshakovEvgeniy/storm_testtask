@@ -42,8 +42,6 @@ int tcp_client(char *srv_addr, char *srv_port)
 
     while(1)
     {
-	bzero(reply_from_srv, 1024);
-	socket_status_read = recv(send_socket, reply_from_srv, 1024, MSG_DONTWAIT);
 //	TRACE(("[TCP] read() status - %d\n", socket_status_read));
 //	sleep(1);
 
@@ -60,6 +58,8 @@ int tcp_client(char *srv_addr, char *srv_port)
 	    case -1: break;
 	    default: TRACE(("[TCP] RX from %s:%d\n", inet_ntoa(addr.sin_addr), atoi(srv_port)));
 		     print_payload(reply_from_srv, socket_status_read);
+		     bzero(reply_from_srv, 1024);
+		     socket_status_read = recv(send_socket, reply_from_srv, 1024, MSG_DONTWAIT);
 		     break;
 
 	};
